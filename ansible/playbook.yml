@@ -2,11 +2,10 @@
 - name: Atualizar Python para 3.9+
   hosts: vm
   become: true
+  gather_facts: false
   tasks:
-    - name: Instalar Python 3.9
-      apt:
-        name:
-          - python3.9
+    - name: Instalar Python 3.9 com apt direto
+      raw: apt-get update && apt-get install -y python3.9 python3.9-distutils
 
 - name: Instalar Docker no Ubuntu
   hosts: vm
