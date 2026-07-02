@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
     - name: Instalar Python 3.9 com apt direto
-      raw: apt-get update && apt-get install -y python3.9 python3.9-distutils
+      raw: DEBIAN_FRONTEND=noninteractive apt-get update -o APT::Update::Post-Invoke-Success::="" && apt-get install -y python3.9 python3.9-distutils
 
 - name: Instalar Docker no Ubuntu
   hosts: vm
