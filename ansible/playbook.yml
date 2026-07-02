@@ -1,4 +1,11 @@
 ---
+- name: Preparar ambiente Python
+  hosts: vm
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Instalar Python 3.9 e dependências do Ansible
+      raw: DEBIAN_FRONTEND=noninteractive apt-get update -o APT::Update::Post-Invoke-Success:="" && apt-get install -y python3.9 python3.9-distutils python3-apt
 
 - name: Instalar Docker no Ubuntu
   hosts: vm
