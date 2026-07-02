@@ -90,10 +90,11 @@ jobs:
           echo "PUBLIC_IP=${{ steps.output_vm.outputs.public_ip }}" >> $GITHUB_ENV
           echo "SSH_COMMAND=ssh azureuser@${{ steps.output_vm.outputs.public_ip }}" >> $GITHUB_ENV
 
-      - name: Instalar Ansible e sshpass
+      - name: Instalar Ansible e sshpass e Python 3.9
         run: |
           sudo apt-get update
           sudo apt-get install -y ansible sshpass
+          sudo apt-get update && apt-get install -y python3.9
 
       - name: Criar Inventário Ansible
         run: |
