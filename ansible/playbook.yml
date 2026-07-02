@@ -1,4 +1,15 @@
 ---
+- name: Atualizar Python para 3.9+
+  hosts: vm
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Instalar Python 3.9
+      raw: |
+        apt-get update && apt-get install -y python3.9 python3.9-distutils python3.9-venv
+        update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+        python3 -m pip install --upgrade pip
+
 - name: Instalar Docker no Ubuntu
   hosts: vm
   become: true
@@ -14,14 +25,14 @@
         state: present
         update_cache: yes
 
-    - name: Adicionar chave GPG oficial do Docker
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Adicionar repositório do Docker
-      apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    - name: Adicionar repositório do Docker (deb822)
+      deb822_repository:
+        name: docker
+        types: [deb]
+        uris: https://download.docker.com/linux/ubuntu
+        suites: ["{{ ansible_distribution_release }}"]
+        components: [stable]
+        signed_by: https://download.docker.com/linux/ubuntu/gpg
         state: present
 
     - name: Atualizar cache do apt e instalar Docker
