@@ -8,7 +8,11 @@
       raw: |
         rm -f /usr/lib/cnf-update-db
         DEBIAN_FRONTEND=noninteractive apt-get update
-        apt-get install -y python3.9 python3.9-distutils python3-apt
+        apt-get install -y python3.9 python3.9-distutils
+        update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+        apt-get install -y python3-apt
+        python3.9 -m pip install --upgrade pip setuptools
+        cd /usr/lib/python3/dist-packages && python3.9 -c "import apt" || python3.9 -m pip install python-apt --no-binary python-apt
 
 - name: Instalar Docker no Ubuntu
   hosts: vm
