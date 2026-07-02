@@ -58,11 +58,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Instalar Python
-        uses: actions/setup-python@v5
-        with:
-         python-version: '3.9'
-
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
 
