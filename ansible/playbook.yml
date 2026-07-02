@@ -1,4 +1,13 @@
 ---
+- name: Atualizar Python para 3.9+
+  hosts: vm
+  become: true
+  tasks:
+    - name: Instalar Python 3.9
+      apt:
+        name:
+          - python3.9
+
 - name: Instalar Docker no Ubuntu
   hosts: vm
   become: true
