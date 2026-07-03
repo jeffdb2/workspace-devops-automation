@@ -16,9 +16,6 @@
     - name: Instalar python3-apt
       raw: apt-get install -y python3-apt
 
-    - name: Instalar pip para Python 3.9 via ensurepip
-      raw: python3.9 -m ensurepip --upgrade
-
     - name: Instalar python-apt via pip para Python 3.9
       raw: python3.9 -m pip install python-apt
 
