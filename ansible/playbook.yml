@@ -28,6 +28,7 @@
     - name: Instalar dependências
       apt:
         name:
+          - python3-apt
           - apt-transport-https
           - ca-certificates
           - curl
